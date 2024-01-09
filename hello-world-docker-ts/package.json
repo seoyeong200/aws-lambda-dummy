@@ -1,0 +1,11 @@
+{
+  "name": "hello-world-docker-ts",
+  "version": "1.0.0",
+  "description": "aws lambda typescript example with docker",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
