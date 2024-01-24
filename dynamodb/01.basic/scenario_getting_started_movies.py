@@ -48,8 +48,24 @@ class Movies:
             )
             raise
 
-    def add_movies(self, title, year, plot, rating):
-        pass
+    def add_movie(self, title, year, plot, rating):
+        try:
+            self.table.put_item(
+                Item={
+                    "year": year,
+                    "title": title,
+                    "info": {"plot": plot, "rating": Decimal(str(rating))},
+                }
+            )
+        except ClientError as err:
+            logger.error(
+                "Couldn't add movie %s to table %s. Here's why: %s: %s",
+                title,
+                self.table.name,
+                err.response["Error"]["Code"],
+                err.response["Error"]["Message"],
+            )
+            raise
 
     def get_movie(self, title, year):
         pass
