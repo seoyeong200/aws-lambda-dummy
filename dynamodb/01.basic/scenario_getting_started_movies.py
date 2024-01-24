@@ -87,7 +87,22 @@ class Movies:
         pass
 
     def query_movies(self, year):
-        pass
+        """
+        Querying table
+        """
+        try:
+            response = self.table.query(KeyConditionExpression=Key("yeat").eq(year))
+        except ClientError as err:
+            logger.error(
+                "Couldn't query movies released in %s from table %s. Here's why: %s %s",
+                year,
+                self.table.name,
+                err.response["Error"]["Code"],
+                err.response["Error"]["Message"],
+            )
+            raise
+        else:
+            return
     
     def scan_movies(self, year_range):
         pass
