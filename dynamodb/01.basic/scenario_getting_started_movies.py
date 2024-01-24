@@ -68,7 +68,20 @@ class Movies:
             raise
 
     def get_movie(self, title, year):
-        pass
+        try:
+            response = self.table.get_item(Key={"year":year, "title":title})
+        except ClientError as err:
+            logger.error(
+                "Couldn't get movie %s from table %s. Here's why: %s %s",
+                title,
+                self.table.name,
+                err.response["Error"]["Code"],
+                err.response["Error"]["Message"]
+            )
+            raise
+        else:
+            return response["Item"]
+
 
     def update_movie(self, title, year, rating, plot):
         pass
