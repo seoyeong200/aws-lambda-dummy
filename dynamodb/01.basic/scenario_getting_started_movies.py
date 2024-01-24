@@ -117,4 +117,11 @@ def run_scenario(table_name, movie_file_name, dyn_resources):
     movies = Movies(dyn_resources)
 
 if __name__ == "__main__":
-    pass
+    try:
+        run_scenario(
+            table_name="doc-example-table-movies", 
+            movie_file_name="moviedata.json",
+            dyn_resources=boto3.resource("dynamodb")
+        )
+    except Exception as e:
+        print(f"Something went wrong with the demo! Here's what: {e}")
